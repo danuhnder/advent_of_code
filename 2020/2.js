@@ -32,17 +32,33 @@ const checkValidPassword = ([freq, x, password]) => {
 }
 // console.log(checkValidPassword([ [ '2', '4' ], 'f', 'xpkffxmlwtgzjppcdf' ]))
 
-const checkThemAll = () => {
+const checkThemAll = (callback) => {
   let numberOfValidPasswords = 0;
   for (let password of parsedPasswords) {
-    if (checkValidPassword(password)) {
+    if (callback(password)) {
       numberOfValidPasswords++;
     }
   }
   return numberOfValidPasswords
 }
 
-console.log(checkThemAll())
+const checkValidPassword2 = ([freq, x, password]) => {
+  const low = parseInt(freq[0]) - 1;
+  const high = parseInt(freq[1]) - 1;
+  
+  let counter = 0;
+  if (password[low] === x) {
+    counter++;
+  } 
+  if (password[high] === x) {
+    counter++;
+  } 
+
+  if (counter === 1) {
+    return true;
+  } else return false;
+}
+console.log(checkThemAll(checkValidPassword2))
 /*
 To try to debug the problem, they have created a list (your puzzle input) of passwords (according to the corrupted database) and the corporate policy when that password was set.
 
