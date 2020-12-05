@@ -48,7 +48,8 @@ Count the number of valid passports - those that have all required fields. Treat
 */
 
 
-const puzzleInput = `
+const samplePuzzleInput = `
+
 ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2017 cid:147 hgt:183cm
 
@@ -62,8 +63,37 @@ hgt:179cm
 
 hcl:#cfa07d eyr:2025 pid:166559648
 iyr:2011 ecl:brn hgt:59in
+
 `
+const puzzleInput = require('./4data')
 
-const inputParser = (str) => str.replace(/\n/g, "@");
+/* I don't think this works. I think i have to build a crawler
+const replaceLineBreaks = (str) => str.replace(/\n/g, "@");
 
-console.log(inputParser(puzzleInput));
+const turnDoublesIntoObjs = 
+
+console.log(inputParser(puzzleInput));  */
+
+// if its a character keep it. 
+
+const modifiedInput = puzzleInput.replace(/\n/g, '@').split('@@').join(`"},{"`).split('@').join(`","`).split(' ').join(`","`).split(':').join(`":"`).slice(3, -3);
+const passportsAsObjects = JSON.parse(`[${modifiedInput}]`)
+console.log(passportsAsObjects.length)
+const checkPassport = (obj) => {
+  if('byr' in obj && 'iyr' in obj && 'eyr' in obj && 'hgt' in obj && 'hcl' in obj && 'ecl' in obj && 'pid' in obj) {
+    return true;
+  }
+  return false;
+}
+
+const validPassportCounter = (arr) => {
+  let validPassports = 0;
+  for (let passport of arr) { 
+    if (checkPassport(passport)) {
+    validPassports++;
+    }
+  }
+  return validPassports;
+};
+
+console.log(validPassportCounter(passportsAsObjects))
