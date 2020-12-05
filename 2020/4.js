@@ -65,7 +65,6 @@ hcl:#cfa07d eyr:2025 pid:166559648
 iyr:2011 ecl:brn hgt:59in
 
 `
-const { includes } = require('./4data');
 const puzzleInput = require('./4data')
 
 /* I don't think this works. I think i have to build a crawler
@@ -75,11 +74,10 @@ const turnDoublesIntoObjs =
 
 console.log(inputParser(puzzleInput));  */
 
-// if its a character keep it. 
+// turns string of characters into array of passport objects
 
 const inputParser = (input) => JSON.parse(`[${input.replace(/\n/g, '@').split('@@').join(`"},{"`).split('@').join(`","`).split(' ').join(`","`).split(':').join(`":"`).slice(3, -3)}]`)
 
-// console.log(passportsAsObjects.length)
 
 const checkPassport = (obj) => {
   if('byr' in obj && 'iyr' in obj && 'eyr' in obj && 'hgt' in obj && 'hcl' in obj && 'ecl' in obj && 'pid' in obj) {
