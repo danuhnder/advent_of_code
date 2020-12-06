@@ -126,7 +126,8 @@ const findHighestSeatNum = (arr, seats) => {
 
 const fullPuzzleInput = require('./5data');
 
-const passes = fullPuzzleInput.split(/\n/g).join(", ").slice(2, -2);
-console.log(passes);
+const passes = fullPuzzleInput
+// .split(/\n/g).join(", ").slice(2, -2);
+// console.log(passes);
 
-// console.log(findHighestSeatNum(passes, one27AndSeven));
+console.log(findHighestSeatNum(passes, one27AndSeven));
