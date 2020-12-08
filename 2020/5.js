@@ -130,4 +130,19 @@ const passes = fullPuzzleInput
 // .split(/\n/g).join(", ").slice(2, -2);
 // console.log(passes);
 
-console.log(findHighestSeatNum(passes, one27AndSeven));
+// console.log(findHighestSeatNum(passes, one27AndSeven));
+
+const findMySeatNumber = (arr, seats) => {
+  const allSeatNumbers = [];
+  arr.forEach(ticket => {
+    const seatNum = ticketChecker(ticket, seats)
+    allSeatNumbers.push(seatNum)
+  });
+  for(let i = 0; i < allSeatNumbers.length; i++) {
+    if (!allSeatNumbers.includes(i)) {
+      console.log(i);
+    }
+  }
+
+}
+findMySeatNumber(passes, one27AndSeven)
