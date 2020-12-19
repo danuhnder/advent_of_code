@@ -1,4 +1,4 @@
-const sampleInput = `
+sampleInput = "
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
 bright white bags contain 1 shiny gold bag.
@@ -8,25 +8,16 @@ dark olive bags contain 3 faded blue bags, 4 dotted black bags.
 vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.
-`
+"
+# Parse input into array of hashes
+#[ {"light red" : { bright white, muted yellow }} ]
 
-/* PSEUDOCODE
+# make an array of winning bags (shiny gold only to begin)
 
-parse input into array [
-  { red bag : {bright white bag, muted yellow bag, muted yellow bag}]
-]
-populate bags object with new bags AND populate children 
-
-
-
-*/
-
-const inputParser = (input) => input.slice(1, -1).split(/\n/g);
-
-console.log(inputParser(sampleInput))
-
-const bags = {}
-const checkInTheBag = bag => {
+def build_bag_of_bags(array_of_bags)
+  bags = Hash.new
+  array_of_bags.each do
+   # look in the bag and see if any children are in the winning bags array. if so, move this bag to the winners array
+   # do this for the children too 
 
 
-}
