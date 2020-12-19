@@ -1,4 +1,5 @@
-module.exports = [`qzbw
+module.exports = [`
+qzbw
 qez
 
 xgedfibnyuhqsrazlwtpocj
@@ -2236,4 +2237,5 @@ batz
 fvkurj
 kfgjvru
 jukfrv
-kvfujr`]
+kvfujr
+`]

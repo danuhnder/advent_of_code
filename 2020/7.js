@@ -9,3 +9,13 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.
 `
+
+/* PSEUDOCODE
+
+parse input into array [
+  { red bag : {bright white bag, muted yellow bag, muted yellow bag}]
+]
+
+
+
+*/
