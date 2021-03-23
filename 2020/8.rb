@@ -625,33 +625,31 @@ def crawler (array)
   @array = array
   @visited = []
 
-  def creep(index)
-    p index
-    if !@visited.include? index
-     p @visited, @array[index], @array[index + 1]
-
-      if @array[index] == "acc"
-        @visited << index
-        val = @array[index+1]
+  def creep(i)
+    
+    if !@visited.include? i
+      @visited << i
+      if @array[i] == "acc"
+        val = @array[i+1]
         if val[0] == '+'
           @accumulator += val.slice(1..-1).to_i
         elsif val[0] == '-'
           @accumulator -= val.slice(1..-1).to_i
         end
-        creep(index + 2)
+        creep(i + 2)
            
-      elsif @array[index] == "jmp"
-        @visited << index
-        val = @array[index+1]
+      elsif @array[i] == "jmp"
+        
+        val = @array[i+1]
         if val[0] == '+'
-          creep(index + 2 * val.slice(1..-1).to_i)
+          creep(i + 2 * val.slice(1..-1).to_i)
         elsif val[0] == '-'
-          creep(index - 2 * val.slice(1..-1).to_i)
+          creep(i - 2 * val.slice(1..-1).to_i)
         end
 
-      elsif @array[index] == "nop"
-        @visited << index
-        creep(index + 2)
+      elsif @array[i] == "nop"
+        @visited << i
+        creep(i + 2)
       end
 
     end  
