@@ -1046,7 +1046,7 @@ sample_input = """22
 66189107160059"""
 
 parsed_input = sample_input.split("\n")
-print(parsed_input)
+# print(parsed_input)
 
 # loop over the input 
 
@@ -1065,4 +1065,54 @@ def xmas_cracker(input, preamble_length):
       lastX.pop(0)
     lastX.append(a)    
 
-print(xmas_cracker(parsed_input, 25))    
+# print(xmas_cracker(parsed_input, 25))    
+
+# PART ONE SOLUTION: 14360655
+
+part_one_solution = xmas_cracker(parsed_input, 25)
+print(part_one_solution)
+# The final step in breaking the XMAS encryption relies on the invalid number you just found: you must find a contiguous set of at least two numbers in your list which sum to the invalid number from step 1.
+
+# Again consider the above example:
+
+# 35
+# 20
+# 15
+# 25
+# 47
+# 40
+# 62
+# 55
+# 65
+# 95
+# 102
+# 117
+# 150
+# 182
+# 127
+# 219
+# 299
+# 277
+# 309
+# 576
+# In this list, adding up all of the numbers from 15 through 40 produces the invalid number from step 1, 127. (Of course, the contiguous set of numbers in your actual list might be much longer.)
+
+# To find the encryption weakness, add together the smallest and largest number in this contiguous range; in this example, these are 15 and 47, producing 62.
+
+# What is the encryption weakness in your XMAS-encrypted list of numbers?
+
+# loop over the input, appending values to a new array. each time you add a value to the new array check the total value of all numbers in the array. if it matches X return new_array[0, -1] . if the sum exceeds x start poppin numbers off the beginning of the array (and check one at a time). 
+def sum_finder(input, target):
+  new = []
+  total = sum(new)
+
+  for val in input:
+    v = int(val)
+    new.append(v)
+    while total > target:
+      new.pop(0)
+      total = sum(new, 0)
+    if total == target:
+      return new
+
+print(sum_finder(parsed_input, part_one_solution))
