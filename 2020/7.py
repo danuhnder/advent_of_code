@@ -600,32 +600,42 @@ gold_bags = 0
 
 # split input into lines
 lines = sample_input.split('\n')
-print(lines)
+# print(lines)
 
 # for each line of the input, determine the outer and inner bags
 for line in lines:
   outer = line.split('bags')[0].replace(" ", "")
   # i know this is terrible but I need to get a run on the board. learning regex can come later. 
   inner = line.split("contain")[1].replace("0", "").replace("1", "").replace("2", "").replace("3", "").replace("4", "").replace("5", "").replace("6", "").replace("7", "").replace("8", "").replace("9", "").replace("bags", "").replace("bag", "").replace(" ", "").replace(".", "").split(',')
-  print(outer, inner)
+  # print(outer, inner)
   # add the bags to the dictionary
   bags[outer] = inner
 
-print(bags)
+# print(bags)
+
+def bag_checker(bag):
+  target = "shinygold"
+  if target in bag:
+    return True
+  else:
+    for inner_bag in bag:
+      if inner_bag != "noother":
+        if bag_checker(bags[inner_bag]):
+          return True 
 
 # for each bag type in the dictionary, see if it has a gold bag inside it. increment the counter if it does
-target = "shinygold"
+
 
 for key in bags.keys():
-  if target in bags[key]:
+  if bag_checker(bags[key]):
     gold_bags += 1
 # if it doesn't, see if any of the other bags inside it have a gold bag in them
-  else:
-    for bag in bags[key]:
-      if bag != "noother":
-        if target in bags[bag]:
-          gold_bags += 1
-          break
+  # else:
+  #   for bag in bags[key]:
+  #     if bag != "noother":
+  #       if target in bags[bag]:
+  #         gold_bags += 1
+  #         break
 
 
 print(gold_bags)
