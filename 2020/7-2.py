@@ -24,27 +24,31 @@ for line in lines:
   inner = line.split("contain")[1].replace("bags", "").replace("bag", "").replace(" ", "").replace(".", "").split(',')
   for bag in inner:
     bags[outer].append((
-      bag[1:] , bag[0]
+      bag[0] , bag[1:]
     ))
 
   # add the bags to the dictionary
 
 print(bags)
 
-# recursive function to check bags. returns true if bag contains a shiny gold bag - otherwise run function on each bag inside.
+# recursive function to be called on shinygold bag. have a counter set to zero. increments the counter by how many bags are inside the bag AND calls itself on bags inside
 
+bag_count = 0
 
 def bag_counter(bag):
-  if target in bag:
-    return True
-  else:
-    for inner_bag in bag:
-      if inner_bag != "noother":
-        if bag_checker(bags[inner_bag]):
-          return True 
+  for inner_bag in bag:
+    if inner_bag[0] != 'n':
+      global bag_count
+      count = int(inner_bag[0])
+      color = inner_bag[1]
+      bag_count += count + (count * bag_counter(bags[color]))
+  
 
+    
 # run bag checker function on each bag in the dictionary. increment the counter if it returns true
-print bag_counter(bags["shinygold"])
 
 
-print(gold_bags)
+bag_counter(bags["shinygold"])
+
+print(bag_count)
+
