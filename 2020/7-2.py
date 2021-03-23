@@ -594,9 +594,8 @@ shiny tomato bags contain 1 dark turquoise bag, 4 vibrant cyan bags, 4 dotted ol
 wavy black bags contain 4 dotted indigo bags, 1 light tan bag, 5 bright cyan bags."""
 
 
-# make a dictionary and a gold bags counter
+# make a dictionary 
 bags = {}
-gold_bags = 0
 
 # split input into lines
 lines = sample_input.split('\n')
@@ -605,22 +604,20 @@ lines = sample_input.split('\n')
 for line in lines:
   outer = line.split('bags')[0].replace(" ", "")
   bags[outer] = []
-  # parse the inner bags and determine how many of each there are. 
+  # parse the inner bags and determine how many of each there are. add to dictionary in form of a tuple (quantity, color)
   inner = line.split("contain")[1].replace("bags", "").replace("bag", "").replace(" ", "").replace(".", "").split(',')
   for bag in inner:
     bags[outer].append((
       bag[0] , bag[1:]
     ))
 
-  # add the bags to the dictionary
-
-print(bags)
 
 # recursive function to be called on shinygold bag. have a counter set to zero. increments the counter by how many bags are inside the bag AND calls itself on bags inside
 
 def bag_counter(bag):
   bag_count = 0
   for inner_bag in bag:
+    # make sure the bag contains other bags
     if inner_bag[0] != 'n':
       count = int(inner_bag[0])
       color = inner_bag[1]
