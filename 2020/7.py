@@ -12,6 +12,16 @@ dotted black bags contain no other bags."""
 # make a dictionary 
 bags = {}
 
-# for each line of the input
+# split input into lines
 lines = sample_input.split('\n')
 print(lines)
+
+# for each line of the input, determine the outer and inner bags
+for line in lines:
+  outer = line.split('bags')[0].replace(" ", "")
+  inner = line.split("contain")[1].replace(" ", "").split(',')
+  print(outer, inner)
+  # add the bags to the dictionary
+  bags[outer] = inner
+
+print(bags)
