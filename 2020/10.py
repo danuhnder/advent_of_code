@@ -195,15 +195,14 @@ print(ones * threes)
 
 def config_checker(arr, i = 0, count = 0):
   maxi = max(arr)
-  next = [x in ]
-  if arr[i] == maxi:
-    count += 1
-  if i + 1 < len(arr) and arr[i + 1] < arr[i] + 4:
-    count += config_checker(arr, i + 1)
-  if i + 2 < len(arr) and arr[i + 2] < arr[i] + 4:
-    count += config_checker(arr, i + 2)
-  if i + 3 < len(arr) and arr[i + 3] < arr[i] + 4:
-    count += config_checker(arr, i + 3)
+  next = [x for x in arr if x > i and x <= i + 3 ]
+  for x in next:
+    if x == maxi:
+      print(x)
+      count += 1
+    else:
+      count += config_checker(arr, x) 
+ 
   return count
 
     
