@@ -79,17 +79,37 @@
 
 # Find a chain that uses all of your adapters to connect the charging outlet to your device's built-in adapter and count the joltage differences between the charging outlet, the adapters, and your device. What is the number of 1-jolt differences multiplied by the number of 3-jolt differences?
 
-sample_input = """16
-10
-15
-5
-1
-11
-7
+sample_input = """28
+33
+18
+42
+31
+14
+46
+20
+48
+47
+24
+23
+49
+45
 19
-6
-12
-4"""
+38
+39
+11
+1
+32
+25
+35
+8
+17
+7
+9
+4
+2
+34
+10
+3"""
 
 f = open('10data.txt', 'r')
 full_puzzle_input = f.read()
@@ -98,7 +118,7 @@ def to_int(n):
   return int(n)
 
 split_input = full_puzzle_input.split("\n")
-print(split_input)
+# print(split_input)
 parsed_input = [to_int(x) for x in split_input]
 parsed_input.sort()
 
@@ -113,6 +133,84 @@ for x in parsed_input:
     threes += 1
   init = x
 
-
 print(ones * threes)  
+
+
+# --- Part Two ---
+
+# To completely determine whether you have enough adapters, you'll need to figure out how many different ways they can be arranged. Every arrangement needs to connect the charging outlet to your device. The previous rules about when adapters can successfully connect still apply.
+
+# The first example above (the one that starts with 16, 10, 15) supports the following arrangements:
+
+# (0), 1, 4, 5, 6, 7, 10, 11, 12, 15, 16, 19, (22)
+# (0), 1, 4, 5, 6, 7, 10, 12, 15, 16, 19, (22)
+# (0), 1, 4, 5, 7, 10, 11, 12, 15, 16, 19, (22)
+# (0), 1, 4, 5, 7, 10, 12, 15, 16, 19, (22)
+# (0), 1, 4, 6, 7, 10, 11, 12, 15, 16, 19, (22)
+# (0), 1, 4, 6, 7, 10, 12, 15, 16, 19, (22)
+# (0), 1, 4, 7, 10, 11, 12, 15, 16, 19, (22)
+# (0), 1, 4, 7, 10, 12, 15, 16, 19, (22)
+# (The charging outlet and your device's built-in adapter are shown in parentheses.) Given the adapters from the first example, the total number of arrangements that connect the charging outlet to your device is 8.
+
+# The second example above (the one that starts with 28, 33, 18) has many arrangements. Here are a few:
+
+# (0), 1, 2, 3, 4, 7, 8, 9, 10, 11, 14, 17, 18, 19, 20, 23, 24, 25, 28, 31,
+# 32, 33, 34, 35, 38, 39, 42, 45, 46, 47, 48, 49, (52)
+
+# (0), 1, 2, 3, 4, 7, 8, 9, 10, 11, 14, 17, 18, 19, 20, 23, 24, 25, 28, 31,
+# 32, 33, 34, 35, 38, 39, 42, 45, 46, 47, 49, (52)
+
+# (0), 1, 2, 3, 4, 7, 8, 9, 10, 11, 14, 17, 18, 19, 20, 23, 24, 25, 28, 31,
+# 32, 33, 34, 35, 38, 39, 42, 45, 46, 48, 49, (52)
+
+# (0), 1, 2, 3, 4, 7, 8, 9, 10, 11, 14, 17, 18, 19, 20, 23, 24, 25, 28, 31,
+# 32, 33, 34, 35, 38, 39, 42, 45, 46, 49, (52)
+
+# (0), 1, 2, 3, 4, 7, 8, 9, 10, 11, 14, 17, 18, 19, 20, 23, 24, 25, 28, 31,
+# 32, 33, 34, 35, 38, 39, 42, 45, 47, 48, 49, (52)
+
+# (0), 3, 4, 7, 10, 11, 14, 17, 20, 23, 25, 28, 31, 34, 35, 38, 39, 42, 45,
+# 46, 48, 49, (52)
+
+# (0), 3, 4, 7, 10, 11, 14, 17, 20, 23, 25, 28, 31, 34, 35, 38, 39, 42, 45,
+# 46, 49, (52)
+
+# (0), 3, 4, 7, 10, 11, 14, 17, 20, 23, 25, 28, 31, 34, 35, 38, 39, 42, 45,
+# 47, 48, 49, (52)
+
+# (0), 3, 4, 7, 10, 11, 14, 17, 20, 23, 25, 28, 31, 34, 35, 38, 39, 42, 45,
+# 47, 49, (52)
+
+# (0), 3, 4, 7, 10, 11, 14, 17, 20, 23, 25, 28, 31, 34, 35, 38, 39, 42, 45,
+# 48, 49, (52)
+# In total, this set of adapters can connect the charging outlet to your device in 19208 distinct arrangements.
+
+# You glance back down at your bag and try to remember why you brought so many adapters; there must be more than a trillion valid ways to arrange them! Surely, there must be an efficient way to count the arrangements.
+
+# What is the total number of distinct ways you can arrange the adapters to connect the charging outlet to your device?
+
+
+# take in the sorted array. start at the lowest number. call check function on each value within one, two or three of the current value. whenever you reach the end of the array (highest value) add to the number of configs.
+
+
+def config_checker(arr, i = 0, count = 0):
+  maxi = max(arr)
+  next = [x in ]
+  if arr[i] == maxi:
+    count += 1
+  if i + 1 < len(arr) and arr[i + 1] < arr[i] + 4:
+    count += config_checker(arr, i + 1)
+  if i + 2 < len(arr) and arr[i + 2] < arr[i] + 4:
+    count += config_checker(arr, i + 2)
+  if i + 3 < len(arr) and arr[i + 3] < arr[i] + 4:
+    count += config_checker(arr, i + 3)
+  return count
+
+    
+
+  
+  
+
+print(config_checker(parsed_input))
+
 
