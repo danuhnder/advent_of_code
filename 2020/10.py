@@ -192,24 +192,36 @@ print(ones * threes)
 
 # take in the sorted array. start at the lowest number. call check function on each value within one, two or three of the current value. whenever you reach the end of the array (highest value) add to the number of configs.
 
-
-def config_checker(arr, i = 0, count = 0):
-  maxi = max(arr)
-  next = [x for x in arr if x > i and x <= i + 3 ]
-  for x in next:
-    if x == maxi:
-      print(x)
-      count += 1
-    else:
-      count += config_checker(arr, x) 
+# this solution works but is too slow for the data set size (how do I calculate ON ??).  
+# def config_checker(arr, i = 0, count = 0):
+#   maxi = max(arr)
+#   next = [x for x in arr if x > i and x <= i + 3 ]
+#   for x in next:
+#     if x == maxi:
+#       print(x)
+#       count += 1
+#     else:
+#       count += config_checker(arr, x) 
  
-  return count
+#   return count
 
-    
+# print(config_checker(parsed_input))
+
+# thanks Bradley Sward on youtube for explaining the solv e on this and teaching me some tricks on the way
+data = [int(x) for x in full_puzzle_input.split("\n")]
+
+# add baseline of 0 and max value (laptop) to the list and sort
+data.append(0)
+data.append(max(data) + 3)
+data.sort()
+
+# make a list for all the 
+paths = [0] * (max(data) + 1)
+paths [0] = 1
+print(paths)
 
   
   
 
-print(config_checker(parsed_input))
 
 
