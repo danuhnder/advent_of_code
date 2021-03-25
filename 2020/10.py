@@ -207,7 +207,7 @@ print(ones * threes)
 
 # print(config_checker(parsed_input))
 
-# thanks Bradley Sward on youtube for explaining the solv e on this and teaching me some tricks on the way
+# thanks Bradley Sward on youtube (https://www.youtube.com/watch?v=eeYanhLamjg&ab_channel=BradleySward) for explaining the solv e on this and teaching me some tricks on the way
 data = [int(x) for x in full_puzzle_input.split("\n")]
 
 # add baseline of 0 and max value (laptop) to the list and sort
@@ -215,12 +215,20 @@ data.append(0)
 data.append(max(data) + 3)
 data.sort()
 
-# make a list for all the 
+# make a list to hold path values 
 paths = [0] * (max(data) + 1)
+# set value of 0 to 1 (we have visited this number, we start here)
 paths [0] = 1
 print(paths)
 
-  
+# starting at one, incrementing by one and going all the way up to max - check if either of the three preceding values appear in the dataset. if they do add their path value to the path value of the current index. 
+for i in range(1, max(data) + 1):
+  for x in range(1, 4):
+    if (i - x) in data:
+      paths[i] += paths[i - x]
+
+print("part 2 solution is " + str(paths[-1]))
+
   
 
 
